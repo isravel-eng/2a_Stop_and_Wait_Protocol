@@ -7,14 +7,33 @@ To write a python program to perform Stop and Wait Protocol.
 1. Start the program.
 2. Create a socket connection between sender and receiver.
 3. Get the number of frames from the user.
-4. Send frames from receiver side to sender side.
-5. Sender receives each frame and sends ACK.
-6. Receiver waits for ACK before sending the next frame.
+4. Sender sends frames to the receiver.
+5. Receiver receives frames and sends ACK.
+6. Sender waits for ACK before sending the next frame.
 7. Stop the program.
 
 ## PROGRAM
 
 ### sender.py
+```python
+import socket
+
+s = socket.socket()
+s.connect(('localhost', 8000))
+
+n = int(input("Enter number of frames: "))
+
+for i in range(n):
+    msg = input("Enter frame: ")
+    s.send(msg.encode())
+
+    ack = s.recv(1024).decode()
+    print("Received:", ack)
+
+s.close()
+```
+
+### receiver.py
 ```python
 import socket
 
@@ -37,28 +56,9 @@ while True:
 conn.close()
 ```
 
-### receiver.py
-```python
-import socket
-
-s = socket.socket()
-s.connect(('localhost', 8000))
-
-n = int(input("Enter number of frames: "))
-
-for i in range(n):
-    msg = input("Enter frame: ")
-    s.send(msg.encode())
-
-    ack = s.recv(1024).decode()
-    print("Received:", ack)
-
-s.close()
-```
-
 ## OUTPUT
 
-### Sender Side
+### Receiver Side
 ```text
 Waiting for connection...
 Connected to ('127.0.0.1', 52618)
@@ -67,7 +67,7 @@ Frame received: Frame1
 Frame received: Frame2
 ```
 
-### Receiver Side
+### Sender Side
 ```text
 Enter number of frames: 3
 Enter frame: Hello
