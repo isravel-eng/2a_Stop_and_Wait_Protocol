@@ -66,6 +66,8 @@ Frame received: Hello
 Frame received: Frame1
 Frame received: Frame2
 ```
+<img width="647" height="136" alt="image" src="https://github.com/user-attachments/assets/374574a5-0fc3-4777-a764-466cf47f2344" />
+
 
 ### Sender Side
 ```text
@@ -77,6 +79,8 @@ Received: ACK
 Enter frame: Frame2
 Received: ACK
 ```
+<img width="639" height="181" alt="image" src="https://github.com/user-attachments/assets/3a5e44d6-6cf9-4644-80cb-f1088e061101" />
+
 
 ## RESULT
 Thus, the python program to perform Stop and Wait Protocol was successfully executed.
