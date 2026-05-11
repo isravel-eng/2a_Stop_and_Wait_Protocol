@@ -1,15 +1,19 @@
 import socket
 
 s = socket.socket()
-s.connect(('localhost', 8000))
+s.bind(('localhost', 8000))
+s.listen(1)
 
-n = int(input("Enter number of frames: "))
+print("Waiting for connection...")
+conn, addr = s.accept()
+print("Connected to", addr)
 
-for i in range(n):
-    msg = input("Enter frame: ")
-    s.send(msg.encode())
+while True:
+    data = conn.recv(1024).decode()
+    if not data:
+        break
 
-    ack = s.recv(1024).decode()
-    print("Received:", ack)
+    print("Frame received:", data)
+    conn.send("ACK".encode())
 
-s.close()
+conn.close()
